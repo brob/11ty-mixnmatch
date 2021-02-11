@@ -6,7 +6,7 @@
         alias: "post", // Makes accessing data easier
         addAllPagesToCollections: true // Adds pages to Collections based on tags
     },
-    tags: ['post'], // The tag for collections
+    tags: ['post'], // The tag for collections,
     layout: "base.html", // Which layout?
     eleventyComputed: {
         title: data => data.post.title, // Post title from data

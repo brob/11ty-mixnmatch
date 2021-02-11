@@ -5,7 +5,6 @@ const query = `*[_type == "blog"] | order(_createdAt desc)`
 module.exports = async function() {
     const data = await sanityClient.fetch(query)
     const preppedData = data.map(prepNewsletter)
-    console.log(preppedData)
     return preppedData
 }
 
@@ -13,6 +12,7 @@ module.exports = async function() {
 
 function prepNewsletter(data) {
     data.body = blocksToMd(data.body,{serializers})
+    data.date = data.publishDate
     return data
 }
 
