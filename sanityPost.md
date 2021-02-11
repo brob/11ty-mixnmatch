@@ -11,7 +11,7 @@
     eleventyComputed: {
         title: data => data.post.title, // Post title from data
         description: data => data.post.description, // Post description from data
-        permalink: data => `/blog/${data.post.slug.current}/index.html`, // Slug and permalink creation
+        permalink: data => `/posts/${data.post.slug.current}/index.html`, // Slug and permalink creation
     }
 }
 ---
