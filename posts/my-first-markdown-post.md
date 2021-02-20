@@ -1,6 +1,7 @@
 ---
 title: "This is my first blog post"
 description: "This is a blog post. Let's see how long I blog for!"
+date: "2021-01-28"
 ---
 
 ## This blog post is markdown

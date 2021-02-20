@@ -7,7 +7,6 @@ layout: 'base.html'
 
 {% for post in collections.posts %}
     <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
-    <p>Post.date: {{ post.date }}</p>
-    <p>post.data.post.date: {{ post.data.post.date }}</p>
+    <p>{{ post.date | date: "%a, %b %d, %Y" }}</p>
     <p>{{ post.data.description }}</p>
 {% endfor %}
