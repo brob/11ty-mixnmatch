@@ -3,20 +3,29 @@ const sanityClient = require('../utils/sanityClient')
 const query = `*[_type == "blog"] | order(_createdAt desc)`
 
 module.exports = async function() {
+    // Fetches data
     const data = await sanityClient.fetch(query)
-    const preppedData = data.map(prepNewsletter)
+
+    // Modifies the data to fit our needs
+    const preppedData = data.map(prepPost)
+
+    // returns this to the 11ty data cascade
     return preppedData
 }
 
 
 
-function prepNewsletter(data) {
+function prepPost(data) {
+    // Converts Portable Text to markdown
     data.body = blocksToMd(data.body,{serializers})
+    // Adjusts where our date lives (for convenience)
     data.date = data.publishDate
+    // Returns back to our main function
     return data
 }
 
 const serializers = {
+    // Creates the code blocks how markdown and 11ty want them
     types: {
         code: props => '```' + props.node.language + '\n' + props.node.code + '\n```'
     }

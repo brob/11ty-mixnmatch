@@ -4,11 +4,11 @@ module.exports = function(config) {
 
     config.addCollection('posts', collection => {
         const posts = collection.getFilteredByTag('post');
-        posts.forEach(item => {
+        const postsWithUpdatedDates = posts.map(item => {
             item.date = item.data.post ? new Date(item.data.post.date) : item.date
-            console.log(item.date)
+            return item
         })
-        const sortedPosts = posts.sort((a, b) => b.date - a.date)
+        const sortedPosts = postsWithUpdatedDates.sort((a, b) => b.date - a.date)
         return sortedPosts;
     });
 }
