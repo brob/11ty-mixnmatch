@@ -1,0 +1,11 @@
+---
+layout: 'base.html'
+permalink: 
+    preview: '/preview/'
+---
+{{ eleventy.serverless | dump(2)}}
+{% set post %}
+{% getPost eleventy.serverless.query.id %}
+{% endset %}
+<pre>{{ post | dump(2) }}</pre>
+{{ post.body }}

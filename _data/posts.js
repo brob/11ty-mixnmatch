@@ -5,7 +5,7 @@ const query = `*[_type == "blog"] | order(_createdAt desc)`
 module.exports = async function() {
     // Fetches data
     const data = await sanityClient.fetch(query)
-
+    console.log(data.map(item => item._id))
     // Modifies the data to fit our needs
     const preppedData = data.map(prepPost)
 
@@ -17,7 +17,7 @@ module.exports = async function() {
 
 function prepPost(data) {
     // Converts Portable Text to markdown
-    data.body = blocksToMd(data.body,{serializers})
+    // data.body = blocksToMd(data.body,{serializers})
     // Adjusts where our date lives (for convenience)
     data.date = data.publishDate
     // Returns back to our main function
