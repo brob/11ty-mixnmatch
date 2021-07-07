@@ -1,6 +1,15 @@
 const blocksToMd = require('@sanity/block-content-to-markdown')
 const sanityClient = require('../utils/sanityClient')
-const query = `*[_type == "blog"] | order(_createdAt desc)`
+const query = `*[_type == 'blog']{
+    ...,  
+    body[]{
+        ..., 
+        asset->{
+        ...,
+        "_key": _id
+        } 
+    }
+} | order(_createdAt desc)`
 
 module.exports = async function() {
     // Fetches data
@@ -17,7 +26,7 @@ module.exports = async function() {
 
 function prepPost(data) {
     // Converts Portable Text to markdown
-    // data.body = blocksToMd(data.body,{serializers})
+    data.body = blocksToMd(data.body,{serializers})
     // Adjusts where our date lives (for convenience)
     data.date = data.publishDate
     // Returns back to our main function

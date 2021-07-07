@@ -1,5 +1,6 @@
 const { EleventyServerlessBundlerPlugin } = require("@11ty/eleventy");
 const blocksToMd = require('@sanity/block-content-to-markdown')
+require('dotenv').config()
 
 module.exports = function(config) {
     config.addPassthroughCopy("style.css");
@@ -14,7 +15,7 @@ module.exports = function(config) {
         return sortedPosts;
     });
 
-    config.addShortcode("getPost", function(id) { 
+    config.addNunjucksShortcode("getPost", async function(id) { 
         const sanityClient = require('./utils/sanityClient')
         sanityClient.config({token: process.env.SANITY_PREVIEW })
 
@@ -30,7 +31,9 @@ module.exports = function(config) {
         } | order(_createdAt desc)`
         const params = {postId: id}
         console.log({params})
-        return sanityClient.fetch(query, params).then(data => data.map(prepPost))
+        const data = await sanityClient.fetch(query, params)
+        console.log(data)
+        return data 
     });
 
 

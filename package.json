@@ -13,6 +13,7 @@
   "dependencies": {
     "@11ty/eleventy": "1.0.0-canary.38",
     "@sanity/block-content-to-markdown": "0.0.5",
-    "@sanity/client": "^2.1.4"
+    "@sanity/client": "^2.1.4",
+    "dotenv": "^10.0.0"
   }
 }
